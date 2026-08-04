@@ -1,32 +1,41 @@
 /* ==========================================================================
    PDC4 — Paseo de Cumbres 4
    Hoja de estilos principal
+
+   Sistema visual: señalética de sendero de montaña. La paleta y las curvas
+   de nivel (líneas topográficas) vienen del nombre del sector — "Paseo de
+   Cumbres" — y se usan como motivo repetido: horizonte de montaña al pie
+   del hero, y una línea de curva de nivel como costura entre secciones.
    ========================================================================== */
 
 :root {
-  /* Paleta — inspirada en las montañas ("Cumbres") y calidez vecinal */
-  --color-primary: #1f3a3d;
-  --color-primary-dark: #142627;
-  --color-primary-light: #2f5458;
-  --color-accent: #d97b4f;
-  --color-accent-dark: #b85f37;
-  --color-accent-light: #f3d9c8;
-  --color-bg: #fbf7f2;
-  --color-surface: #ffffff;
-  --color-text: #22292a;
-  --color-text-muted: #5b6664;
-  --color-border: #e4ded4;
-  --color-success: #3a7d5c;
-  --color-danger: #b3432b;
+  /* Paleta — tonos de piedra, pino y atardecer sobre cumbres */
+  --color-primary: #16231e;
+  --color-primary-dark: #0e1815;
+  --color-primary-light: #2f4a3d;
+  --color-accent: #c1602e;
+  --color-accent-dark: #96481f;
+  --color-accent-light: #f1d9c4;
+  --color-gold: #94742a;
+  --color-gold-dark: #6f5720;
+  --color-gold-light: #efe6cc;
+  --color-bg: #eef0e6;
+  --color-surface: #fffdf9;
+  --color-text: #1b241f;
+  --color-text-muted: #5c6b60;
+  --color-border: #dcdccd;
+  --color-success: #3c7d54;
+  --color-danger: #a8412a;
 
   --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, monospace;
 
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
 
-  --shadow-sm: 0 1px 2px rgba(20, 38, 39, 0.08);
-  --shadow-md: 0 6px 20px rgba(20, 38, 39, 0.10);
+  --shadow-sm: 0 1px 2px rgba(14, 24, 21, 0.10);
+  --shadow-md: 0 10px 28px rgba(14, 24, 21, 0.14);
 
   --max-width: 1120px;
 }
@@ -59,9 +68,15 @@ img {
 }
 
 h1, h2, h3, h4 {
-  line-height: 1.25;
+  line-height: 1.2;
   margin: 0 0 0.5em;
   color: var(--color-primary-dark);
+  letter-spacing: -0.01em;
+}
+
+h1, h2 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -122,6 +137,36 @@ button {
 }
 
 /* -------------------------------------------------------------------------
+   Motivo topográfico — costura entre secciones
+   Se usa como ::before/::after (sin marcado extra) sobre .section--muted y
+   .site-footer. Los colores están fijos en el data-URI (no toman variables
+   CSS); si cambia --color-gold o --color-border, actualizar aquí también.
+   ------------------------------------------------------------------------- */
+.section--muted,
+.site-footer {
+  position: relative;
+}
+
+.section--muted::before,
+.section--muted::after,
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 16' preserveAspectRatio='none'%3E%3Cpath d='M0,8 C100,2 200,14 300,8 C400,2 500,14 600,8 C700,2 800,14 900,8 C1000,2 1100,14 1200,8' fill='none' stroke='%2394742a' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 300px 12px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.section--muted::before { top: 0; }
+.section--muted::after { bottom: 0; transform: scaleY(-1); }
+.site-footer::before { top: 0; }
+
+/* -------------------------------------------------------------------------
    Encabezado / navegación
    ------------------------------------------------------------------------- */
 .site-header {
@@ -131,6 +176,7 @@ button {
   top: 0;
   z-index: 50;
   box-shadow: var(--shadow-sm);
+  border-bottom: 2px solid var(--color-gold-dark);
 }
 
 .nav {
@@ -159,7 +205,12 @@ button {
   height: 2.1rem;
   border-radius: 50%;
   background: var(--color-accent);
-  font-size: 1.1rem;
+  color: var(--color-primary-dark);
+}
+
+.nav__brand-mark svg {
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
 .nav__brand-text {
@@ -169,11 +220,12 @@ button {
 }
 
 .nav__brand-sub {
+  font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 0.68rem;
-  color: #cfe0df;
+  font-size: 0.65rem;
+  color: var(--color-gold-light);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
 }
 
 .nav__toggle {
@@ -222,17 +274,18 @@ button {
 }
 
 .nav__link {
-  color: #eaf1f0;
+  color: #eaf1ea;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.35rem 0.1rem;
   border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 .nav__link:hover,
 .nav__link:focus-visible {
-  border-bottom-color: var(--color-accent);
+  border-bottom-color: var(--color-gold);
 }
 
 .nav__link[aria-current="page"] {
@@ -242,10 +295,13 @@ button {
 
 .nav__cta {
   background: var(--color-accent);
-  color: #1a1a1a;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
+  color: #fff9f4;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-md);
   font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
 }
 
 .nav__cta:hover,
@@ -297,13 +353,12 @@ button {
   }
 
   .nav__link[aria-current="page"] {
-    background: rgba(217, 123, 79, 0.15);
+    background: rgba(193, 96, 46, 0.18);
   }
 
   .nav__cta {
     margin: 0.75rem 1.25rem;
     text-align: center;
-    border-radius: var(--radius-sm);
   }
 }
 
@@ -311,29 +366,77 @@ button {
    Hero
    ------------------------------------------------------------------------- */
 .hero {
-  background:
-    radial-gradient(circle at 15% 20%, rgba(217, 123, 79, 0.18), transparent 45%),
-    linear-gradient(160deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: #fff;
-  padding: 4.5rem 0 4rem;
+  padding: 4.5rem 0 6.5rem;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: -100px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(193, 96, 46, 0.35), transparent 70%);
+  filter: blur(10px);
+  animation: heroGlowDrift 22s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes heroGlowDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(70px, 40px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; }
+}
+
+/* Horizonte de montaña — silueta que cierra el hero contra el fondo de la
+   página. El fill es --color-bg en hexadecimal fijo (no puede tomar la
+   variable dentro de un data-URI); mantenerlos sincronizados si cambia. */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,62 L90,38 L150,52 L230,18 L300,46 L380,10 L460,44 L540,24 L620,50 L700,16 L790,42 L870,26 L950,48 L1040,20 L1120,44 L1200,30' fill='none' stroke='%2394742a' stroke-width='2' opacity='0.5'/%3E%3Cpath d='M0,100 L0,74 L90,50 L190,66 L300,28 L400,60 L500,22 L600,52 L710,32 L800,60 L900,26 L1000,54 L1100,34 L1200,50 L1200,100 Z' fill='%23eef0e6'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  z-index: 1;
 }
 
 .hero__inner {
+  position: relative;
+  z-index: 2;
   max-width: 42rem;
 }
 
 .hero__eyebrow {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #eaf1f0;
-  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  margin-bottom: 1.25rem;
+  color: var(--color-gold-light);
+  border-bottom: 1px solid rgba(239, 230, 204, 0.35);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero__eyebrow::before {
+  content: "▲";
+  color: var(--color-accent);
+  font-size: 0.7em;
 }
 
 .hero h1 {
@@ -343,7 +446,7 @@ button {
 }
 
 .hero p {
-  color: #d8e6e4;
+  color: #d9e0d5;
   font-size: 1.1rem;
   max-width: 38rem;
 }
@@ -361,30 +464,42 @@ button {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.4rem;
-  border-radius: 999px;
+  gap: 0.55rem;
+  padding: 0.75rem 1.3rem;
+  border-radius: var(--radius-md);
   font-weight: 700;
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   border: 2px solid transparent;
   cursor: pointer;
-  font-size: 0.95rem;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  font-size: 0.85rem;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn::after {
+  content: "→";
+  transition: transform 0.15s ease;
 }
 
 .btn:hover {
   transform: translateY(-1px);
 }
 
+.btn:hover::after {
+  transform: translateX(3px);
+}
+
 .btn--primary {
   background: var(--color-accent);
-  color: #1a1208;
+  color: #fff9f4;
 }
 
 .btn--primary:hover,
 .btn--primary:focus-visible {
   background: var(--color-accent-dark);
   color: #fff;
+  box-shadow: var(--shadow-md);
 }
 
 .btn--outline {
@@ -394,7 +509,7 @@ button {
 
 .btn--outline:hover,
 .btn--outline:focus-visible {
-  border-color: #fff;
+  border-color: var(--color-gold);
   background: rgba(255, 255, 255, 0.08);
 }
 
@@ -406,6 +521,7 @@ button {
 .btn--solid-dark:hover,
 .btn--solid-dark:focus-visible {
   background: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
 }
 
 /* -------------------------------------------------------------------------
@@ -417,8 +533,8 @@ button {
 
 .section--muted {
   background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  padding-top: calc(3.5rem + 10px);
+  padding-bottom: calc(3.5rem + 10px);
 }
 
 .section__head {
@@ -427,12 +543,13 @@ button {
 }
 
 .section__kicker {
-  color: var(--color-accent-dark);
+  font-family: var(--font-mono);
+  color: var(--color-gold-dark);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.4em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5em;
   display: block;
 }
 
@@ -458,16 +575,24 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
 }
 
 .card__badge {
   align-self: flex-start;
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.25rem 0.65rem;
-  border-radius: 999px;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 1.1rem 0.3rem 0.65rem;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
   background: var(--color-accent-light);
   color: var(--color-accent-dark);
 }
@@ -478,8 +603,8 @@ button {
 }
 
 .card__badge--planeado {
-  background: #e4e9f7;
-  color: #33459a;
+  background: var(--color-gold-light);
+  color: var(--color-gold-dark);
 }
 
 .card__badge--completado {
@@ -493,8 +618,9 @@ button {
 }
 
 .card__meta {
+  font-family: var(--font-mono);
   color: var(--color-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
 }
 
 .card__desc {
@@ -516,6 +642,30 @@ button {
 }
 
 /* -------------------------------------------------------------------------
+   Animación de aparición al hacer scroll
+   El JS añade .reveal antes de observar y .is-visible al entrar en pantalla;
+   si prefers-reduced-motion está activo, el JS no añade ninguna de las dos
+   clases y el contenido queda visible de inmediato.
+   ------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.grid > .reveal:nth-child(1) { transition-delay: 0ms; }
+.grid > .reveal:nth-child(2) { transition-delay: 70ms; }
+.grid > .reveal:nth-child(3) { transition-delay: 140ms; }
+.grid > .reveal:nth-child(4) { transition-delay: 210ms; }
+.grid > .reveal:nth-child(5) { transition-delay: 280ms; }
+.grid > .reveal:nth-child(6) { transition-delay: 350ms; }
+
+/* -------------------------------------------------------------------------
    Galería
    ------------------------------------------------------------------------- */
 .gallery-grid {
@@ -532,10 +682,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #eaf1f0;
+  color: #eaf1ea;
   text-align: center;
   padding: 1rem;
   border: 1px solid var(--color-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .gallery-item img {
@@ -545,7 +701,8 @@ button {
 }
 
 .gallery-item__placeholder {
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
 }
 
 /* -------------------------------------------------------------------------
@@ -609,6 +766,13 @@ button {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
 }
 
 .contact-card__icon {
@@ -620,17 +784,17 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
   margin-bottom: 0.75rem;
 }
 
 .editable-note {
   display: inline-block;
   margin-top: 0.5rem;
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   color: var(--color-danger);
   background: #fbe6e0;
-  padding: 0.2rem 0.55rem;
+  padding: 0.25rem 0.6rem;
   border-radius: var(--radius-sm);
 }
 
@@ -639,8 +803,8 @@ button {
    ------------------------------------------------------------------------- */
 .site-footer {
   background: var(--color-primary-dark);
-  color: #cfe0df;
-  padding: 2.5rem 0 1.5rem;
+  color: #cfe0d6;
+  padding: calc(2.5rem + 10px) 0 1.5rem;
   margin-top: 3rem;
 }
 
@@ -657,7 +821,7 @@ button {
 }
 
 .footer-grid a {
-  color: #cfe0df;
+  color: #cfe0d6;
   text-decoration: none;
   display: block;
   padding: 0.25rem 0;
@@ -665,14 +829,15 @@ button {
 }
 
 .footer-grid a:hover {
-  color: var(--color-accent);
+  color: var(--color-gold);
 }
 
 .site-footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding-top: 1.25rem;
-  font-size: 0.8rem;
-  color: #9db4b1;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #93a89b;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
@@ -687,8 +852,13 @@ button {
     padding: 2.5rem 0;
   }
 
+  .section--muted {
+    padding-top: calc(2.5rem + 10px);
+    padding-bottom: calc(2.5rem + 10px);
+  }
+
   .hero {
-    padding: 3.25rem 0 2.75rem;
+    padding: 3.25rem 0 5rem;
   }
 
   .report-panel iframe {

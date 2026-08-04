@@ -71,6 +71,30 @@
     return div.innerHTML;
   }
 
+  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var revealObserver = !prefersReducedMotion && "IntersectionObserver" in window
+    ? new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      )
+    : null;
+
+  function revealOnScroll(elements) {
+    if (!revealObserver) return;
+    elements.forEach(function (el) {
+      el.classList.add("reveal");
+      revealObserver.observe(el);
+    });
+  }
+
   function loadInto(containerId, jsonPath, renderFn, opts) {
     var container = document.getElementById(containerId);
     if (!container) return;
@@ -95,6 +119,7 @@
         });
         var toRender = limit ? sorted.slice(0, limit) : sorted;
         container.innerHTML = toRender.map(renderFn).join("");
+        revealOnScroll(container.querySelectorAll(".card"));
       })
       .catch(function (err) {
         console.error(err);
@@ -104,6 +129,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
+    revealOnScroll(document.querySelectorAll(".contact-card, .gallery-item, .report-panel"));
 
     loadInto("proyectos-destacados", "data/proyectos.json", renderProjectCard, {
       limit: 3,
