@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # PDC4 — Paseo de Cumbres 4
 
 Sitio de comunicación vecinal para el sector Paseo de Cumbres 4: proyectos en
@@ -7,6 +11,19 @@ curso, anuncios, galería y un canal para reportar incidencias. Estado actual:
 - **Sitio en vivo**: https://barbamx.github.io/pdc4/
 - **Repositorio**: https://github.com/barbamx/pdc4
 - **Administrador**: barbamx (heberb32@gmail.com)
+
+## Comandos
+
+No hay build, lint, ni test suite — es HTML/CSS/JS plano (ver decisión abajo).
+
+- **Previsualizar localmente** (requerido porque `js/main.js` usa `fetch()`
+  para cargar `data/*.json`, lo cual falla con `file://`):
+  ```bash
+  python3 -m http.server 8000
+  ```
+  Luego abrir `http://localhost:8000`.
+- **Desplegar**: commit + push a `main`; GitHub Pages sirve el repo tal cual
+  (no hay paso de build ni CI).
 
 ## Stack y decisiones de arquitectura
 
