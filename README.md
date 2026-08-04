@@ -4,6 +4,8 @@ Sitio piloto, estático (HTML/CSS/JS sin build), para informar a los vecinos sob
 proyectos en curso, anuncios y para recibir reportes de incidencias. Pensado para
 alojarse en GitHub Pages.
 
+**Sitio en vivo**: https://barbamx.github.io/pdc4/
+
 ## Estructura
 
 ```
