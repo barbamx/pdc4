@@ -1,0 +1,20 @@
+[
+  {
+    "titulo": "Reparación de alumbrado público",
+    "estado": "En progreso",
+    "fecha": "2026-07-28",
+    "descripcion": "Sustitución de luminarias dañadas en las calles principales del sector. Se espera concluir en las próximas semanas."
+  },
+  {
+    "titulo": "Pintura de guarniciones y señalización",
+    "estado": "Planeado",
+    "fecha": "2026-07-15",
+    "descripcion": "Repintado de guarniciones y actualización de señalamientos viales para mejorar la seguridad peatonal."
+  },
+  {
+    "titulo": "Poda y mantenimiento de áreas verdes",
+    "estado": "Completado",
+    "fecha": "2026-06-30",
+    "descripcion": "Poda general de árboles y arbustos en camellones y áreas comunes del sector."
+  }
+]

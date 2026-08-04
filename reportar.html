@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reportar una incidencia · PDC4</title>
+  <meta name="description" content="Reporta incidencias de seguridad, mantenimiento u otras situaciones en el sector Paseo de Cumbres 4." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231f3a3d'/%3E%3Cpath d='M15 72 L38 34 L52 56 L65 28 L90 72 Z' fill='%23d97b4f'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <nav class="nav container" data-open="false">
+      <a class="nav__brand" href="index.html">
+        <span class="nav__brand-mark" aria-hidden="true">⛰</span>
+        <span class="nav__brand-text">
+          PDC4
+          <span class="nav__brand-sub">Paseo de Cumbres 4</span>
+        </span>
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list" aria-label="Abrir menú de navegación">
+        <span class="nav__toggle-icon"></span>
+      </button>
+      <ul class="nav__list" id="nav-list">
+        <li><a class="nav__link" href="index.html">Inicio</a></li>
+        <li><a class="nav__link" href="proyectos.html">Proyectos</a></li>
+        <li><a class="nav__link" href="anuncios.html">Anuncios</a></li>
+        <li><a class="nav__link" href="galeria.html">Galería</a></li>
+        <li><a class="nav__link" href="contacto.html">Contacto</a></li>
+        <li><a class="nav__link nav__cta" href="reportar.html" aria-current="page">Reportar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero__inner">
+        <span class="hero__eyebrow">Reporta una incidencia</span>
+        <h1>Cuéntanos qué está pasando</h1>
+        <p>
+          Usa el formulario a continuación para reportar problemas de seguridad, mantenimiento
+          u otras situaciones en el sector. Tu reporte llega directamente al administrador.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="report-panel">
+          <!--
+            TODO (administrador): reemplazar el "src" del iframe con el enlace de
+            "Insertar" de tu Google Form (Formulario de Google > Enviar > Insertar HTML <>).
+            Debe verse similar a:
+            https://docs.google.com/forms/d/e/TU_ID_DE_FORMULARIO/viewform?embedded=true
+          -->
+          <iframe
+            src="https://docs.google.com/forms/d/e/TODO_REEMPLAZAR_CON_TU_FORMULARIO/viewform?embedded=true"
+            title="Formulario de reporte de incidencias PDC4"
+            loading="lazy"
+          >Cargando formulario…</iframe>
+
+          <p class="report-fallback">
+            ¿El formulario no carga? Puedes abrirlo directamente en una nueva pestaña:
+            <a href="https://docs.google.com/forms/d/e/TODO_REEMPLAZAR_CON_TU_FORMULARIO/viewform" target="_blank" rel="noopener">
+              Abrir formulario de reporte
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--muted">
+      <div class="container">
+        <div class="section__head">
+          <span class="section__kicker">Para el administrador</span>
+          <h2>Campos recomendados para el Google Form</h2>
+          <p>Sugerencia de estructura al crear el formulario en Google Forms:</p>
+        </div>
+        <ul class="field-list">
+          <li><strong>Tipo de reporte</strong>Lista desplegable: Seguridad, Mantenimiento, Ruido, Otro</li>
+          <li><strong>Ubicación / referencia</strong>Texto corto: calle, número o punto de referencia</li>
+          <li><strong>Descripción</strong>Texto largo con el detalle de la situación</li>
+          <li><strong>Foto (opcional)</strong>Campo de carga de archivo</li>
+          <li><strong>Nombre y contacto (opcional)</strong>Para dar seguimiento si es necesario</li>
+          <li><strong>Urgencia</strong>Opción múltiple: Baja, Media, Alta</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>PDC4</h4>
+          <p>Sitio piloto de comunicación para el sector Paseo de Cumbres 4.</p>
+        </div>
+        <div>
+          <h4>Navegación</h4>
+          <a href="proyectos.html">Proyectos</a>
+          <a href="anuncios.html">Anuncios</a>
+          <a href="galeria.html">Galería</a>
+        </div>
+        <div>
+          <h4>Vecinos</h4>
+          <a href="reportar.html">Reportar incidencia</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© 2026 PDC4 — Paseo de Cumbres 4. Sitio piloto.</span>
+        <span>Administrado por la vecindad.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
